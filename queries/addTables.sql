@@ -46,5 +46,8 @@ CREATE TABLE Ticket (
     ShowID INT,
     SeatNumber VARCHAR(10),
     Price DECIMAL(8, 2),
-    FOREIGN KEY (ShowID) REFERENCES `Show`(ShowID)
+    BookingTime DATETIME,
+    UserID INT,
+    FOREIGN KEY (ShowID) REFERENCES Movie_Show(ShowID),
+    INDEX idx_show_id (ShowID)
 );

@@ -1,0 +1,1 @@
+const { getTheatreDates } = require('../models/theatreModel');
