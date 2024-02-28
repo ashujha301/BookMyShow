@@ -1,7 +1,5 @@
-const {DataTypes} =  require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require("../config/connection");
-const Movie = require('./movieModel');
-const Theatre = require('./theatreModel');
 
 const ShowTime = sequelize.define("ShowTime",{
     ShowTimeID: {
@@ -11,19 +9,11 @@ const ShowTime = sequelize.define("ShowTime",{
     },
     MovieID: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Movie,
-            key: MovieID
-        }
+        allowNull: false
     },
     TheatreID: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Theatre,
-            key: TheatreID
-        }
+        allowNull: false
     },
     Date: {
         type: DataTypes.DATEONLY,
@@ -31,7 +21,7 @@ const ShowTime = sequelize.define("ShowTime",{
     },
     Time: {
         type: DataTypes.TIME,
-        allowNull: FontFaceSetLoadEvent
+        allowNull: false
     },
     AvailableSeats: {
         type: DataTypes.INTEGER,
@@ -39,10 +29,15 @@ const ShowTime = sequelize.define("ShowTime",{
     }
 });
 
-//Relationship of showtime with movie and theatre table
+module.exports = ShowTime;
 
-ShowTime.belongsTo(Movie);
-ShowTime.belongsTo(Theatre);
+// Associate models after all models have been defined
+const Movie = require('./movieModel');
+const Theatre = require('./theatreModel');
+
+ShowTime.belongsTo(Movie, { foreignKey: 'MovieID' });
+ShowTime.belongsTo(Theatre, { foreignKey: 'TheatreID' });
+
 
 ShowTime.sync();
 

@@ -22,7 +22,7 @@ const Movie = sequelize.define('Movie', {
 });
 
 //Relationship of Movie with Showtime is One to Many 
-Movie.hasMany(ShowTime);
+Movie.hasMany(ShowTime, { foreignKey: 'MovieID' });
 
 Movie.sync();
 

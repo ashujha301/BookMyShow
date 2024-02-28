@@ -17,7 +17,7 @@ const Theatre = sequelize.define('Theatre', {
 });
 
 //Relationship of theatre with showtime is One to many
-Theatre.hasMany(ShowTime);
+Theatre.hasMany(ShowTime,{foreignKey: 'TheatreID'});
 
 Theatre.sync();
 
