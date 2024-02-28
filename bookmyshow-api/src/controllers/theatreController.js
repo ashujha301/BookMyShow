@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const sequelize = require("../config/connection");
-const Theatre = require("../models/theatreModel");
-const { trace } = require("../routes/theatreRoutes");
+const sequelize = require("../../connection");
+const {Theatre} = require("../models/tablesModel");
+
 
 //get all theatres
 const all_theatre = async(req,res) =>{

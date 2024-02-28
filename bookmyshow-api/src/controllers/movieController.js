@@ -1,5 +1,5 @@
 const express = require("express");
-const Movie = require('../models/movieModel');
+const {Movie} = require('../models/tablesModel');
 
 
 const all_movie = async (req,res) => {

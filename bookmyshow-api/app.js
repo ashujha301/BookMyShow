@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./config/connection');
-const theatreRoutes = require('./routes/theatreRoutes');
-const movieRoutes = require('./routes/movieRoutes');
+const sequelize = require('./connection');
+const theatreRoutes = require('./src/routes/theatreRoutes');
+const movieRoutes = require('./src/routes/movieRoutes');
 // const ticketRoutes = require('./routes/ticketRoutes');
 
 const app = express();
