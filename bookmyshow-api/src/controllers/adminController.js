@@ -3,7 +3,7 @@ const { Movie, Theatre, ShowTime } = require("../models/tablesModel");
 
 
 // --------------------------------------------//create Showtime: showid,theatreid,movieid,date,showtime\\-----------------------------------------------------
-
+//need to check this 
 const createShow = async (req, res) => {
   try {
     const showtimeData = req.body;
@@ -24,10 +24,9 @@ const createShow = async (req, res) => {
         continue;
       }
 
-      // Check if a show with the same details already exists
+      // Check if any show with the same theatre, date, and time exists
       const existingShow = await ShowTime.findOne({
         where: {
-          MovieID,
           TheatreID,
           Date,
           Time,
@@ -36,19 +35,13 @@ const createShow = async (req, res) => {
 
       if (existingShow) {
         console.warn(
-          "Showtime with the same details already exists:",
+          "Showtime with the same theatre, date, and time already exists:",
           showtime
         );
         continue;
       }
 
-      const newShowTime = await ShowTime.create({
-        MovieID,
-        TheatreID,
-        Date,
-        Time,
-      });
-
+      const newShowTime = await ShowTime.create(showtime);
       createdShowtimes.push(newShowTime);
     }
 
@@ -63,5 +56,8 @@ const createShow = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
 
 module.exports = { createShow };
