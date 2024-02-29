@@ -1,5 +1,5 @@
 const express = require("express");
-const { Movie } = require("../models/tablesModel");
+const { Movie,Theatre,ShowTime } = require("../models/tablesModel");
 
 const all_movie = async (req, res) => {
   try {
@@ -11,6 +11,7 @@ const all_movie = async (req, res) => {
   }
 };
 
+//Create Movies
 const create_movie = async (req, res) => {
   try {
     const movieData = req.body;
@@ -66,4 +67,44 @@ const create_movie = async (req, res) => {
   }
 };
 
-module.exports = { all_movie, create_movie };
+//List all Theatres with MovieID and dates
+const listTheatres = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { Date } = req.query;
+
+    if (!id || !Date) {
+      return res
+        .status(400)
+        .json({ message: "Please provide a valid movie ID and date." });
+    }
+
+    const showtimes = await ShowTime.findAll({
+      where: {
+        MovieID: id,
+        Date: Date,
+      },
+      include: [
+        {
+          model: Theatre,
+          attributes: ["TheatreName", "Location"],
+        },
+      ],
+    });
+
+    // Extract theaters' names and locations from the showtimes
+    const theaters = showtimes.map((showtime) => {
+      return {
+        TheatreName: showtime.Theatre.TheatreName,
+        Location: showtime.Theatre.Location,
+      };
+    });
+
+    res.json(theaters);
+  } catch (error) {
+    console.error("Error fetching showtimes:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { all_movie, create_movie, listTheatres };
