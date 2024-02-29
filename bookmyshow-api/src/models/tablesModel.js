@@ -1,7 +1,7 @@
 const sequelize = require('../../connection');
 const { Sequelize, DataTypes } = require('sequelize');
 
-// Define Movie model
+// --------------------------------------------------------// Define Movie model\\------------------------------------------------------------
 const Movie = sequelize.define('Movie', {
     MovieID: {
         type: DataTypes.INTEGER,
@@ -18,9 +18,17 @@ const Movie = sequelize.define('Movie', {
     Language: {
         type: DataTypes.STRING
     }
+},
+{
+    indexes: [
+        {
+            unique:true,
+            fields: ['MovieID']
+        }
+    ]
 });
 
-// Define Theatre model
+// --------------------------------------------------------// Define Movie model\\------------------------------------------------------------
 const Theatre = sequelize.define('Theatre', {
     TheatreID: {
         type: DataTypes.INTEGER,
@@ -33,9 +41,14 @@ const Theatre = sequelize.define('Theatre', {
     Location: {
         type: DataTypes.STRING
     }
+},{
+    indexes: [{
+        unique:true,
+        fields: ['TheatreID']
+    }]
 });
 
-// Define ShowTime model
+// --------------------------------------------------------// Define Movie model\\------------------------------------------------------------
 const ShowTime = sequelize.define("ShowTime", {
     ShowTimeID: {
         type: DataTypes.INTEGER,
@@ -69,5 +82,33 @@ ShowTime.belongsTo(Theatre, { foreignKey: 'TheatreID' });
 // Sync all models with the database
 sequelize.sync();
 
-// Export models
+
+// --------------------------------------------------------//Drop Indexes\\------------------------------------------------------------
+
+// sequelize.queryInterface.removeIndex('Movies', 'MovieID')
+//   .then(() => {
+//     console.log('Index on MovieID removed successfully.');
+//   })
+//   .catch((error) => {
+//     console.error('Error removing index on MovieID:', error);
+//   });
+
+// // Remove the index on TheatreID in the Theatre table
+// sequelize.queryInterface.removeIndex('Theatres', 'TheatreID')
+//   .then(() => {
+//     console.log('Index on TheatreID removed successfully.');
+//   })
+//   .catch((error) => {
+//     console.error('Error removing index on TheatreID:', error);
+//   });
+
+// sequelize.queryInterface.removeIndex('ShowTime', 'Date')
+// .then(()=>{
+//     console.log("index removed");
+// })
+// .catch(err =>{
+//     console.error(err);
+// });
+
 module.exports = { Movie, Theatre, ShowTime };
+
