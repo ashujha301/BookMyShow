@@ -1,7 +1,9 @@
 const express = require("express");
 const { Movie, Theatre, ShowTime } = require("../models/tablesModel");
 
-//create Showtime: showid,theatreid,movieid,date,showtime
+
+// --------------------------------------------//create Showtime: showid,theatreid,movieid,date,showtime\\-----------------------------------------------------
+
 const createShow = async (req, res) => {
   try {
     const showtimeData = req.body;

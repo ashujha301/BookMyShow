@@ -3,7 +3,7 @@ const router = express.Router();
 const sequelize = require("../../connection");
 const { Theatre } = require("../models/tablesModel");
 
-//get all theatres
+// --------------------------------------------------------//get All Theatres\\------------------------------------------------------------
 const all_theatre = async (req, res) => {
   try {
     const theatres = await Theatre.findAll();
@@ -14,7 +14,7 @@ const all_theatre = async (req, res) => {
   }
 };
 
-//create theatres
+// --------------------------------------------------------//Create Theatres\\------------------------------------------------------------
 const create_theatre = async (req, res) => {
   try {
     const theatreData = req.body;
@@ -77,7 +77,7 @@ const create_theatre = async (req, res) => {
   }
 };
 
-//get particular theatre with id
+// --------------------------------------------------------//get Particular theatres with id \\------------------------------------------------------------
 
 const theatreId = async (req, res) => {
   try {
