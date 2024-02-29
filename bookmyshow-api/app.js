@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./connection');
 const theatreRoutes = require('./src/routes/theatreRoutes');
 const movieRoutes = require('./src/routes/movieRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
 // const ticketRoutes = require('./routes/ticketRoutes');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use('/theatres', theatreRoutes);
 app.use('/movies', movieRoutes);
+app.use('/admin',adminRoutes);
 // app.use('/tickets', ticketRoutes);
 
 // Syncronise models with database

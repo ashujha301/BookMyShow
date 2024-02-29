@@ -57,10 +57,6 @@ const ShowTime = sequelize.define("ShowTime", {
     Time: {
         type: DataTypes.TIME,
         allowNull: false
-    },
-    AvailableSeats: {
-        type: DataTypes.INTEGER,
-        allowNull: false
     }
 });
 
